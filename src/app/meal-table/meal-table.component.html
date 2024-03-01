@@ -1,0 +1,19 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Description</th>
+			<th scope="col">Meal</th>
+			<th scope="col">Carbs Consumed</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let carbCount of carbCounts; index as i">
+			<!-- <th scope="row">{{ i + 1 }}</th> -->
+			<td>
+				{{ carbCount.description }}
+			</td>
+			<td>{{ carbCount.meal | titlecase }}</td>
+			<td>{{ carbCount.carbsConsumed | number }}</td>
+		</tr>
+	</tbody>
+</table>

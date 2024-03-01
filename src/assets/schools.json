@@ -1,0 +1,12 @@
+[
+  {
+    "display": "East Liberty",
+    "key": "east-liberty",
+    "meals": ["breakfast", "lunch"]
+  },
+  {
+    "display": "Homestead",
+    "key": "homestead",
+    "meals": ["lunch", "breakfast"]
+  }
+]
