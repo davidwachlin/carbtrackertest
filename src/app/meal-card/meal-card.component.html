@@ -4,7 +4,7 @@
     <!-- <h5 class="card-title">{{ meal.description }}</h5> -->
     <p class="card-text">{{ meal.meal | titlecase }}</p>
     <p class="card-text">Carbs: {{ meal.carbs }}</p>
-    <p class="card-text">Id: {{ meal.id }}</p>
+    <p class="card-text">Portion Size: {{ portionSize }}</p>
     <div class="btn-group">
       <button type="button" [ngClass]="getButtonClass('half')" (click)="onChangePortionSize('half')">Half</button>
       <button type="button" [ngClass]="getButtonClass('full')" (click)="onChangePortionSize('full')">Full</button>
