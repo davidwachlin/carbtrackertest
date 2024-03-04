@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CarbCount, Meal } from '../types';
+import { CarbCount } from '../types';
 
 @Component({
   selector: 'app-meal-table',

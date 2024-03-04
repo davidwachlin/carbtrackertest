@@ -13,10 +13,14 @@ export class AppComponent {
   private storageKey = 'saved-school';
   schools: School[] = [];
   selectedSchool: string = '';
-  selectedDate: string = '';
+  date: string = '';
   meals: Meal[] = [];
+  breakfastMeals: Meal[] = [];
+  lunchMeals: Meal[] = [];
 
-  constructor(private googleFormMealsService: GoogleFormMealsService) { }
+  constructor(private googleFormMealsService: GoogleFormMealsService) {
+    this.date = new Date().toJSON().slice(0, 10);
+  }
 
   onSelectSchool(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
@@ -26,17 +30,9 @@ export class AppComponent {
       localStorage.setItem(this.storageKey, value);
     }
 
-    if (this.selectedDate) {
-      this.fetchMeals();
-    }
-  }
-
-  onSelectDate(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    this.selectedDate = value;
-
     this.fetchMeals();
   }
+
 
   fetchSchools() {
     // TODO: CORS issue, implement as observable:
@@ -56,6 +52,7 @@ export class AppComponent {
       console.log('hasSavedSchool ', hasSavedSchool);
       if (savedSchoolKey && hasSavedSchool) {
         this.selectedSchool = savedSchoolKey;
+        this.fetchMeals();
       }
     }
   }
@@ -66,7 +63,10 @@ export class AppComponent {
     //   console.log(response);
     //   this.meals = response;
     // });
-    this.meals = this.googleFormMealsService.getMeals(this.selectedSchool, this.selectedDate);
+    const meals = this.googleFormMealsService.getMeals(this.selectedSchool, this.date);
+    this.breakfastMeals = meals.filter(meal => meal.meal === 'breakfast');
+    this.lunchMeals = meals.filter(meal => meal.meal === 'lunch');
+    this.meals = this.googleFormMealsService.getMeals(this.selectedSchool, this.date);
   }
 
   ngOnInit() {

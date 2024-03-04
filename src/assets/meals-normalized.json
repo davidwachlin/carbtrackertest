@@ -2,9 +2,9 @@
   {
     "meal": "breakfast",
     "date": "2024-03-01",
-    "carbs": "0",
+    "carbs": "100",
     "school": "east-liberty",
-    "description": "Eggs",
+    "description": "Pancakes",
     "id": "2024-03-01-i0"
   },
   {
@@ -12,8 +12,32 @@
     "meal": "breakfast",
     "school": "east-liberty",
     "carbs": "300",
-    "description": "Burrito",
+    "description": "Waffle",
     "id": "2024-03-01-i1"
+  },
+  {
+    "date": "2024-03-01",
+    "meal": "breakfast",
+    "carbs": "20",
+    "school": "east-liberty",
+    "description": "Eggs",
+    "id": "2024-03-01-i2"
+  },
+  {
+    "meal": "lunch",
+    "date": "2024-03-01",
+    "school": "east-liberty",
+    "carbs": "34",
+    "description": "Burger",
+    "id": "2024-03-01-i3"
+  },
+  {
+    "date": "2024-03-01",
+    "meal": "lunch",
+    "school": "east-liberty",
+    "carbs": "300",
+    "description": "Burrito",
+    "id": "2024-03-01-i4"
   },
   {
     "date": "2024-03-01",
@@ -21,15 +45,23 @@
     "carbs": "20",
     "school": "east-liberty",
     "description": "Eggs",
-    "id": "2024-03-01-i2"
+    "id": "2024-03-01-i5"
+  },
+  {
+    "meal": "lunch",
+    "date": "2024-03-01",
+    "school": "east-liberty",
+    "carbs": "34",
+    "description": "Burger",
+    "id": "2024-03-01-i6"
   },
   {
     "meal": "breakfast",
     "date": "2024-03-01",
     "school": "east-liberty",
-    "carbs": "34",
-    "description": "Burger",
-    "id": "2024-03-01-i3"
+    "carbs": "30",
+    "description": "Bacon",
+    "id": "2024-03-01-i7"
   }
 
 ]

@@ -1,5 +1,5 @@
 <nav class="navbar bg-body-tertiary mb-3">
-  <div class="container-fluid">
+
     <div class="container">
       <div class="row">
 
@@ -16,26 +16,13 @@
             aria-label="select school"
           >
             <option value="">Choose School</option>
-            <option *ngFor="let school of schools" [value]="school.key">
+            <option *ngFor="let school of schools" [value]="school.key" [selected]="school.key === selectedSchool">
               {{ school.display }}
             </option>
           </select>
         </div>
-        <div class="col">
-          <ng-container *ngIf="selectedSchool">
-            <label class="form-label" for="date">Date:</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              (change)="onSelectDate($event)"
-              class="form-control"
-              min="2024-03-01"
-            />
-          </ng-container>
-        </div>
       </div>
-    </div>
+
 
   </div>
 </nav>
@@ -43,7 +30,11 @@
 <div class="container">
   <div class="menu content" *ngIf="meals.length">
     <div class="row">
-      <app-meal-card-list [meals]="meals"></app-meal-card-list>
+      <app-meal-card-list
+        [meals]="meals"
+        [breakfastMeals]="breakfastMeals"
+        [lunchMeals]="lunchMeals"
+      ></app-meal-card-list>
 
     </div>
   </div>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Meal, MealResponse, School } from './types';
 
 import schoolList from '../assets/schools.json';
-import mealsList from '../assets/meals.json';
+import mealsList from '../assets/meals-normalized.json';
 
 @Injectable({
   providedIn: 'root'
