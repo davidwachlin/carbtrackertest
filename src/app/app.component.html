@@ -1,8 +1,7 @@
+<!-- NAV -->
 <nav class="navbar bg-body-tertiary mb-3">
-
     <div class="container">
       <div class="row">
-
         <a class="navbar-brand" href="#">CarbTracker</a>
       </div>
       <div class="row">
@@ -22,21 +21,79 @@
           </select>
         </div>
       </div>
-
-
   </div>
 </nav>
+<!-- END NAV -->
 
 <div class="container">
   <div class="menu content" *ngIf="meals.length">
-    <div class="row">
-      <app-meal-card-list
-        [meals]="meals"
-        [breakfastMeals]="breakfastMeals"
-        [lunchMeals]="lunchMeals"
-      ></app-meal-card-list>
+    <div class="accordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            [ngClass]="this.isShowingBreakfast ? 'accordion-button' : 'accordion-button collapsed'"
+            (click)="toggleMealList()"
+            type="button"
 
+          >
+            <h3>Breakfast</h3>
+          </button>
+        </h2>
+        <div
+          [ngClass]="this.isShowingBreakfast ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'"
+        >
+          <div class="accordion-body">
+            <div class="row g-3 mt-1">
+              <ng-container *ngIf="isShowingBreakfast">
+                <div class="col" *ngFor="let meal of breakfastMeals">
+                  <app-meal-card
+                    [meal]="meal"
+                    (newCarbCountEvent)="updateCarbCount($event)"
+                  ></app-meal-card>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            [ngClass]="!this.isShowingBreakfast ? 'accordion-button' : 'accordion-button collapsed'"
+            type="button"
+            (click)="toggleMealList()"
+          >
+          <h3>Lunch</h3>
+          </button>
+        </h2>
+        <div
+          [ngClass]="!this.isShowingBreakfast ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'"
+        >
+          <div class="accordion-body">
+            <div class="row g-1 mt-1">
+
+              <ng-container *ngIf="!isShowingBreakfast">
+                <div class="col" *ngFor="let meal of lunchMeals">
+                  <app-meal-card
+                    [meal]="meal"
+                    (newCarbCountEvent)="updateCarbCount($event)"
+                  ></app-meal-card>
+                </div>
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
 </div>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <p>{{ date | date}}</p>
+    <h5>Total Carbs Consumed: {{ carbsConsumedTotal }}</h5>
+    <!-- <app-meal-table [carbCounts]="carbCounts"></app-meal-table> -->
+    </div>
+</footer>

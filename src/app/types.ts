@@ -1,4 +1,4 @@
-type MealType = 'breakfast' | 'lunch';
+export type MealType = 'breakfast' | 'lunch';
 
 export interface MealResponse {
   meal: MealType;

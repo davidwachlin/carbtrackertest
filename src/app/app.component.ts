@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meal, School } from './types';
+import { CarbCount, Meal, MealType, School } from './types';
 import { GoogleFormMealsService } from './google-form-meals.service';
 
 @Component({
@@ -15,10 +15,12 @@ export class AppComponent {
   meals: Meal[] = [];
   breakfastMeals: Meal[] = [];
   lunchMeals: Meal[] = [];
+  carbCounts: CarbCount[] = [];
+  carbsConsumedTotal: number = 0;
+  isShowingBreakfast: boolean = true;
 
   constructor(private googleFormMealsService: GoogleFormMealsService) {
     this.date = new Date().toJSON().slice(0, 10);
-    // this.date = '2024-03-01';
   }
 
   onSelectSchool(event: Event) {
@@ -62,7 +64,42 @@ export class AppComponent {
     });
   }
 
+  updateCarbCount(updatedCount: CarbCount) {
+
+    if (updatedCount.portionSize === 'none') {
+      const filteredCounts = this.carbCounts.filter(carbCount => carbCount.id !== updatedCount.id);
+      this.carbCounts = filteredCounts;
+      this.updateTotal();
+      return;
+    }
+    if (this.carbCounts.some(carbCount => carbCount.id === updatedCount.id)) {
+      this.carbCounts = this.carbCounts.map(carbCount => carbCount.id === updatedCount.id ? updatedCount : carbCount);
+      this.updateTotal();
+      return;
+    }
+    this.carbCounts.push(updatedCount);
+    this.carbsConsumedTotal += updatedCount.carbsConsumed;
+  }
+
+  updateTotal() {
+    this.carbsConsumedTotal = this.carbCounts
+      .reduce((acc, carbCount) => acc + carbCount.carbsConsumed, 0);
+  }
+
   ngOnInit() {
     this.fetchSchools();
+  }
+
+  toggleMealList() {
+
+    this.isShowingBreakfast = !this.isShowingBreakfast;
+  }
+
+  getAccordionButtonClass(mealType: MealType) {
+    console.log('getAccordionButtonClass', mealType, this.isShowingBreakfast)
+    if (mealType === 'breakfast') {
+      return this.isShowingBreakfast ? 'accordion-button' : 'accordion-button collapsed';
+    }
+    return this.isShowingBreakfast ? 'accordion' : 'accordion is-hidden';
   }
 }

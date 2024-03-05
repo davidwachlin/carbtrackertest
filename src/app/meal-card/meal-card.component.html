@@ -1,21 +1,12 @@
-<div class="card mb-3" style="width: 12rem;">
-  <div class="card-header text-bg-primary">{{ meal.description | titlecase }}</div>
+<div class="card mb-3" style="width: 9rem">
+  <div class="card-header text-bg-primary">{{ meal.description | titlecase | ellipsis:10 }}</div>
   <div class="card-body">
-    <!-- <h5 class="card-title">{{ meal.description }}</h5> -->
-    <p class="card-text">{{ meal.meal | titlecase }}</p>
-    <p class="card-text">Carbs: {{ meal.carbs }}</p>
-    <p class="card-text">Portion Size: {{ portionSize }}</p>
+    <p class="card-text"><small>Carbs: {{ meal.carbs }}</small></p>
+    <p class="card-text"><small>Portion: {{ portionSize }}</small></p>
     <div class="btn-group">
       <button type="button" [ngClass]="getButtonClass('half')" (click)="onChangePortionSize('half')">Half</button>
       <button type="button" [ngClass]="getButtonClass('full')" (click)="onChangePortionSize('full')">Full</button>
     </div>
-    <!-- <div class="btn-group" role="group">
-      <input type="radio" class="btn-check" name="half" id="half" autocomplete="off" (change)="addNewCarbCount($event)">
-      <label class="btn btn-outline-primary" for="half">Half</label>
 
-      <input type="radio" class="btn-check" name="whole" id="whole" autocomplete="off">
-      <label class="btn btn-outline-primary" for="whole">Whole</label>
-
-    </div> -->
   </div>
 </div>

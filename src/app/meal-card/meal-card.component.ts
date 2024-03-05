@@ -45,7 +45,6 @@ export class MealCardComponent {
       return 'btn btn-primary';
     }
     return 'btn btn-outline-primary';
-    // return this.meal.carbs === '0' ? 'btn-danger' : 'btn-success';
   }
 
 }

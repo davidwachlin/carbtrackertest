@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MealTableComponent } from './meal-table/meal-table.component';
 import { MealCardComponent } from './meal-card/meal-card.component';
 import { MealCardListComponent } from './meal-card-list/meal-card-list.component';
+import { EllipsisPipePipe } from './ellipsis-pipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MealTableComponent,
     MealCardComponent,
-    MealCardListComponent
+    MealCardListComponent,
+    EllipsisPipePipe
   ],
   imports: [
     BrowserModule,
