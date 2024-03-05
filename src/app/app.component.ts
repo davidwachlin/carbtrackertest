@@ -8,8 +8,6 @@ import { GoogleFormMealsService } from './google-form-meals.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-
   private storageKey = 'saved-school';
   schools: School[] = [];
   selectedSchool: string = '';
@@ -20,11 +18,11 @@ export class AppComponent {
 
   constructor(private googleFormMealsService: GoogleFormMealsService) {
     this.date = new Date().toJSON().slice(0, 10);
+    // this.date = '2024-03-01';
   }
 
   onSelectSchool(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
-
     if (value.length) {
       this.selectedSchool = value;
       localStorage.setItem(this.storageKey, value);
@@ -35,43 +33,36 @@ export class AppComponent {
 
 
   fetchSchools() {
-    // TODO: CORS issue, implement as observable:
-    // this.googleFormMealsService.getSchools().subscribe(response => {
-    //   console.log(response);
-    //   this.meals = response;
-    // });
     console.log('fetchSchools');
-    const schools = this.googleFormMealsService.getSchools();
-    console.log(schools);
-    if (schools.length) {
-      this.schools = schools;
+    this.googleFormMealsService.getSchools().subscribe(schoolsResponse => {
+      if (schoolsResponse?.length) {
+        this.schools = [...schoolsResponse];
 
-      const savedSchoolKey = localStorage.getItem(this.storageKey);
-      console.log(savedSchoolKey);
-      const hasSavedSchool = schools.some(school => school.key === savedSchoolKey);
-      console.log('hasSavedSchool ', hasSavedSchool);
-      if (savedSchoolKey && hasSavedSchool) {
-        this.selectedSchool = savedSchoolKey;
-        this.fetchMeals();
+        const savedSchoolKey = localStorage.getItem(this.storageKey);
+        console.log('savedSchoolKey', savedSchoolKey);
+        const hasSavedSchool = schoolsResponse.some(school => school.key === savedSchoolKey);
+        console.log('hasSavedSchool ', hasSavedSchool);
+        if (savedSchoolKey && hasSavedSchool) {
+          this.selectedSchool = savedSchoolKey;
+          this.fetchMeals();
+        }
       }
-    }
+    });
   }
 
   fetchMeals() {
-    // TODO: CORS issue, implement as observable:
-    // this.googleFormMealsService.getMeals(this.selectedSchool, this.selectedDate).subscribe(response => {
-    //   console.log(response);
-    //   this.meals = response;
-    // });
-    const meals = this.googleFormMealsService.getMeals(this.selectedSchool, this.date);
-    this.breakfastMeals = meals.filter(meal => meal.meal === 'breakfast');
-    this.lunchMeals = meals.filter(meal => meal.meal === 'lunch');
-    this.meals = this.googleFormMealsService.getMeals(this.selectedSchool, this.date);
+    this.googleFormMealsService.getMeals(this.selectedSchool, this.date).subscribe(mealsResponse => {
+      console.log('fetchMeals mealsResponse: ', mealsResponse);
+      if (mealsResponse?.length) {
+        const meals: Meal[] = mealsResponse.map((meal, i) => ({ ...meal, id: `${meal.date}-i${i}` }))
+        this.meals = [...meals];
+        this.breakfastMeals = meals.filter(meal => meal.meal === 'breakfast');
+        this.lunchMeals = meals.filter(meal => meal.meal === 'lunch');
+      }
+    });
   }
 
   ngOnInit() {
     this.fetchSchools();
   }
 }
-
-// https://api-hm4fpyx6ka-uc.a.run.app/meals/east-liberty?date=2024-03-01

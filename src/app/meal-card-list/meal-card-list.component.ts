@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CarbCount, Meal } from '../types';
-import mealsList from '../../assets/meals-normalized.json';
 
 @Component({
   selector: 'app-meal-card-list',
