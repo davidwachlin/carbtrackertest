@@ -18,8 +18,9 @@ export class MealCardComponent {
   @Output() newCarbCountEvent = new EventEmitter<Meal>();
 
   onChangePortionSize(portion: PortionSize) {
+    console.log('onChangePortionSize portion', portion);
     if (this.meal.portionSize === portion) {
-      portion = 'none';
+      return;
     }
     const carbsConsumed = portionValues[portion] * parseInt(this.meal.carbs, 10);
     const mealWithCarbCount: Meal = {

@@ -1,8 +1,12 @@
 <div class="card mb-3" style="width: 100%">
-  <div class="card-header text-bg-primary">{{ meal.description | titlecase | ellipsis:10 }}</div>
+  <div class="card-header text-bg-primary">{{ meal.description | titlecase }}</div>
   <div class="card-body">
-    <p class="card-text"><small>Carbs: {{ meal.carbs }}</small></p>
-    <p class="card-text"><small>Portion: {{ meal.portionSize }}</small></p>
+    <p class="card-text">
+      <small><strong>Carbs:</strong> {{ meal.carbs }}</small>
+    </p>
+    <p class="card-text">
+      <small><strong>Portion:</strong> {{ meal.portionSize | titlecase }}</small>
+    </p>
     <div class="btn-group">
       <button type="button" [ngClass]="getButtonClass('none')" (click)="onChangePortionSize('none')">None</button>
       <button type="button" [ngClass]="getButtonClass('half')" (click)="onChangePortionSize('half')">Half</button>
