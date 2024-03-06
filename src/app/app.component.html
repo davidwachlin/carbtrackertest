@@ -43,7 +43,7 @@
           [ngClass]="this.isShowingBreakfast ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'"
         >
           <div class="accordion-body">
-            <div class="row g-3 mt-1">
+
               <ng-container *ngIf="isShowingBreakfast">
                 <div class="col" *ngFor="let meal of breakfastMeals; index as i; trackBy: trackByFn">
                   <app-meal-card
@@ -52,7 +52,7 @@
                   ></app-meal-card>
                 </div>
               </ng-container>
-            </div>
+
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
           [ngClass]="!this.isShowingBreakfast ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'"
         >
           <div class="accordion-body">
-            <div class="row g-1 mt-1">
+
 
               <ng-container *ngIf="!isShowingBreakfast">
                 <div class="col" *ngFor="let meal of lunchMeals; index as i; trackBy: trackByFn">
@@ -81,7 +81,7 @@
                 </div>
               </ng-container>
 
-            </div>
+
           </div>
         </div>
       </div>
