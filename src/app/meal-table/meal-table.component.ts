@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CarbCount } from '../types';
+import { Meal } from '../types';
 
 @Component({
   selector: 'app-meal-table',
@@ -8,7 +8,7 @@ import { CarbCount } from '../types';
 })
 export class MealTableComponent {
   constructor() { }
-  @Input() carbCounts: CarbCount[] = [];
+  @Input() meals: Meal[] = [];
 
 
 }

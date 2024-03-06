@@ -10,6 +10,8 @@ export interface MealResponse {
 
 export interface Meal extends MealResponse {
   id: string;
+  carbsConsumed: number;
+  portionSize: PortionSize;
 }
 
 export interface School {
@@ -19,8 +21,3 @@ export interface School {
 }
 
 export type PortionSize = 'half' | 'full' | 'none';
-
-export interface CarbCount extends Meal {
-  carbsConsumed: number;
-  portionSize: PortionSize;
-}

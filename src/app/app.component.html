@@ -26,7 +26,7 @@
 <!-- END NAV -->
 
 <div class="container">
-  <div class="menu content" *ngIf="meals.length">
+  <div class="menu content" *ngIf="meals?.length">
     <div class="accordion">
       <div class="accordion-item">
         <h2 class="accordion-header">
@@ -45,7 +45,7 @@
           <div class="accordion-body">
             <div class="row g-3 mt-1">
               <ng-container *ngIf="isShowingBreakfast">
-                <div class="col" *ngFor="let meal of breakfastMeals">
+                <div class="col" *ngFor="let meal of breakfastMeals; index as i; trackBy: trackByFn">
                   <app-meal-card
                     [meal]="meal"
                     (newCarbCountEvent)="updateCarbCount($event)"
@@ -73,7 +73,7 @@
             <div class="row g-1 mt-1">
 
               <ng-container *ngIf="!isShowingBreakfast">
-                <div class="col" *ngFor="let meal of lunchMeals">
+                <div class="col" *ngFor="let meal of lunchMeals; index as i; trackBy: trackByFn">
                   <app-meal-card
                     [meal]="meal"
                     (newCarbCountEvent)="updateCarbCount($event)"

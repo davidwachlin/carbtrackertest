@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CarbCount, Meal, PortionSize } from '../types';
+import { Meal, PortionSize } from '../types';
 import { Output, EventEmitter } from '@angular/core';
 
 export const portionValues: Record<PortionSize, number> = {
@@ -15,24 +15,14 @@ export const portionValues: Record<PortionSize, number> = {
 })
 export class MealCardComponent {
   @Input() meal: Meal;
-  @Output() newCarbCountEvent = new EventEmitter<CarbCount>();
-  portionSize: PortionSize | null = null;
+  @Output() newCarbCountEvent = new EventEmitter<Meal>();
 
   onChangePortionSize(portion: PortionSize) {
-    console.log('MealCardComponent.onChangePortionSize: ', portion);
-    if (this.portionSize === portion) {
-      this.portionSize = null;
-      this.addNewCarbCount('none');
-      return;
+    if (this.meal.portionSize === portion) {
+      portion = 'none';
     }
-    this.portionSize = portion;
-    this.addNewCarbCount(portion);
-  }
-
-  addNewCarbCount(portion: PortionSize) {
-    // this.portionSize = portion;
     const carbsConsumed = portionValues[portion] * parseInt(this.meal.carbs, 10);
-    const mealWithCarbCount: CarbCount = {
+    const mealWithCarbCount: Meal = {
       ...this.meal,
       carbsConsumed,
       portionSize: portion
@@ -41,7 +31,7 @@ export class MealCardComponent {
   }
 
   getButtonClass(portion: PortionSize) {
-    if (this.portionSize === portion) {
+    if (this.meal.portionSize === portion) {
       return 'btn btn-primary';
     }
     return 'btn btn-outline-primary';

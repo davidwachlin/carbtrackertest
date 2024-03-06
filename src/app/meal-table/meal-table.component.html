@@ -7,12 +7,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let carbCount of carbCounts; index as i">
+		<tr *ngFor="let meal of meals; index as i">
 			<td>
-				{{ carbCount.description }}
+				{{ meal.description }}
 			</td>
-			<td>{{ carbCount.meal | titlecase }}</td>
-			<td>{{ carbCount.carbsConsumed | number }}</td>
+			<td>{{ meal.meal | titlecase }}</td>
+			<td>{{ meal.carbsConsumed | number }}</td>
 		</tr>
 	</tbody>
 </table>
