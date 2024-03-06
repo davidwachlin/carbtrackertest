@@ -18,7 +18,6 @@ export class MealCardComponent {
   @Output() newCarbCountEvent = new EventEmitter<Meal>();
 
   onChangePortionSize(portion: PortionSize) {
-    console.log('onChangePortionSize portion', portion);
     if (this.meal.portionSize === portion) {
       return;
     }
